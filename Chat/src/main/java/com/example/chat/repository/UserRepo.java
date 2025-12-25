@@ -14,4 +14,5 @@ public interface UserRepo extends JpaRepository<User,Long> {
     @Query("select u from User u where u.rollNo=:rollNo")
     Optional<User> findByRollNo(@Param("rollNo") String rollNo);
 
+
 }

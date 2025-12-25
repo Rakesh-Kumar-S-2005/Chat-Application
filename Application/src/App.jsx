@@ -4,6 +4,8 @@ import {Login} from './Component/Login.jsx'
 import {Routes, Route} from 'react-router-dom'
 import { Home } from './Component/Home.jsx'
 import { ProtectedRoute } from './Component/Protection/ProtectedRoute.jsx'
+import { Provider } from 'react-redux'
+import {store} from './Component/Redux/store.js'
 function App() {
  
 
@@ -19,7 +21,9 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <Home />
+         <Provider store={store}>
+                <Home />
+              </Provider>
             </ProtectedRoute>
           }
         />
