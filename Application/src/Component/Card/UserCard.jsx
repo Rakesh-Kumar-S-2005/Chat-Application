@@ -1,6 +1,6 @@
-export const UserCard = ({username,rollno}) => {
+export const UserCard = ({onClick, username,rollno}) => {
   return (
-    <div className="flex items-center gap-3 px-3 py-2 rounded-md
+    <div onClick={onClick} className="flex items-center gap-3 px-3 py-2 rounded-md
                     hover:bg-green-100 cursor-pointer transition">
 
       <div className="w-9 h-9 rounded-full bg-gray-200

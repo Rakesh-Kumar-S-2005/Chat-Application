@@ -1,10 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { UserCard } from "./Card/UserCard";
-import { useEffect } from "react";
+import { use, useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "./Redux/User/UserSlice";
+import { ChatArea } from "./Card/ChatArea";
 export const Home = () => {
   const navigate = useNavigate();
+
+  const [details, setDetails] = useState({
+    rollNo: null,
+    userName: null,
+  });
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -32,15 +38,18 @@ console.log("Users List:", list);
         {/* Sidebar */}
         <aside className="w-80 bg-white border-r border-gray-200 
                           overflow-y-auto px-3 py-4 space-y-3 m-2 rounded-lg shadow-lg ">
-                            <h1>Your<span className="text-green-600"> Colleagues</span></h1>
+                            <h1>Your<span className="text-green-600"> Colleagues!</span></h1>
           {
             list.map((user) => (
-             <UserCard username={user.userName} rollno={user.rollNo} />
+             <UserCard onClick={() => setDetails({ rollNo: user.rollNo, userName: user.userName })} username={user.userName} rollno={user.rollNo} />
             ))
           }
         </aside>
 
         {/* Chat Area */}
+        {
+          details.rollNo ? <ChatArea userName={details.userName} rollNo={details.rollNo} />
+          :
         <main className="flex-1 flex items-center m-2 justify-center bg-gray-100">
           <div className="text-center max-w-md">
             <h2 className="text-2xl font-semibold text-gray-700 mb-2">
@@ -51,6 +60,7 @@ console.log("Users List:", list);
             </p>
           </div>
         </main>
+}
 
       </div>
     </div>
